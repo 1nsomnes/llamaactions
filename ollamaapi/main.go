@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
+import (
+  "fmt"
+  "1nsomnes/ollamaapi/webcalls"
+)
 
 func main() {
-  fmt.Println("Hello world!")
+  fmt.Println(webcalls.CallGemma2b("Respond with one word: \"yes\""))
 }
