@@ -3,16 +3,15 @@ package main
 import (
   "fmt"
   "1nsomnes/ollamaapi/webcalls"
+  "1nsomnes/ollamaapi/routes"
   "github.com/gin-gonic/gin"
 )
 
 func main() {
   r := gin.Default()
-  r.GET("/ping", func(c *gin.Context) {
-    c.JSON(200, gin.H{
-      "message": "pong",
-    })
-  })
+  
+  routes.RegisterRoutes(r)
+
   r.Run()
 
   fmt.Println(webcalls.CallGemma2b("Respond with one word: \"yes\""))
