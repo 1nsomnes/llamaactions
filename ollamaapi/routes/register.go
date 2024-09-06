@@ -5,5 +5,6 @@ import (
 )
 
 func RegisterRoutes(r *gin.Engine) {
-  Ping(r)
+  RegisterPingRoute(r)
+  RegisterActionRoute(r)
 }
