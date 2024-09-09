@@ -4,6 +4,7 @@ import (
   "github.com/gin-gonic/gin"
   "1nsomnes/ollamaapi/webcalls"
   "net/http"
+  "fmt"
 )
 
 type Prompt struct {
@@ -23,7 +24,15 @@ func RegisterActionRoute(r *gin.Engine) {
       return
     }
     
-    response := webcalls.CallGemma2b(prompt.Prompt)
+    promptMsg := "Please categorize a sentence, I will first provide a sentence that you must categorize and then a list of actions each with a description. Respond ONLY WITH THE ACTION NAME that the sentence corresponds to or the word \"uncertain\" if you don't know."
+    promptMsg += "\nSentence: " + prompt.Prompt + "\n"
+
+    for action, description := range prompt.Actions {
+      promptMsg += fmt.Sprintf("\n\"%s\":\"%s\"", action, description) 
+    }
+    
+    print(promptMsg)
+    response := webcalls.CallGemma2b(promptMsg)
 
     c.JSON(http.StatusOK, gin.H{
       "message":response,
